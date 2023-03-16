@@ -1,8 +1,19 @@
 const Product = require("../model/Product");
 
-const getProductService = async()=>{
+const getProductService = async(camino)=>{
     try {
-        const products = await Product.find();
+        let products;
+        if(camino =="/products"){
+            products = await Product.find();
+        }
+        if(camino =="/products/hombres"){
+            products = await Product.find({"genero":"Hombre"});
+        }
+        if(camino == "/products/mujeres"){
+            products = await Product.find({"genero":"Mujer"});
+        }
+        
+        
         return products;
     } catch (error) {
         return error;
